@@ -1,0 +1,183 @@
+@import "tailwindcss";
+
+/* ─── Design System Theme Tokens ──────────────────────────────────────────── */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Sidebar */
+  --width-sidebar-expanded: 260px;
+  --width-sidebar-collapsed: 72px;
+
+  /* Animation */
+  --animate-fade-in: fade-in 0.3s ease-out;
+  --animate-slide-up: slide-up 0.3s ease-out;
+}
+
+/* ─── Keyframes ───────────────────────────────────────────────────────────── */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes typing-dot {
+  0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-4px); }
+}
+
+/* ─── Base Styles ─────────────────────────────────────────────────────────── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+body {
+  overflow: hidden;
+  min-height: 100dvh;
+}
+
+#root {
+  min-height: 100dvh;
+  display: flex;
+}
+
+/* ─── Solid Card Utilities (Replaces Glassmorphism) ─────────────────────── */
+.glass-panel {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+}
+
+.glass-panel-elevated {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+}
+
+/* ─── Status Indicators ───────────────────────────────────────────────────── */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-dot-critical { background: #ef4444; }
+.status-dot-warning { background: #f59e0b; }
+.status-dot-healthy { background: #10b981; }
+.status-dot-info { background: #3b82f6; }
+
+/* ─── Confidence Meter ────────────────────────────────────────────────────── */
+.confidence-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: #f1f5f9;
+  overflow: hidden;
+}
+
+.confidence-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.6s ease-out, background 0.3s ease;
+}
+
+.confidence-high { background: #10b981; }
+.confidence-medium { background: #f59e0b; }
+.confidence-low { background: #ef4444; }
+
+/* ─── Card Hover Effects ──────────────────────────────────────────────────── */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  border-color: #cbd5e1;
+}
+
+/* ─── Sparkline Container ─────────────────────────────────────────────────── */
+.sparkline-container {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 32px;
+}
+
+.sparkline-bar {
+  flex: 1;
+  min-width: 3px;
+  border-radius: 1px 1px 0 0;
+  background: #bfdbfe;
+  transition: background 0.2s ease, height 0.3s ease;
+}
+
+.sparkline-bar:last-child {
+  background: #3b82f6;
+}
+
+/* ─── Active nav indicator ────────────────────────────────────────────────── */
+.nav-active-indicator {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60%;
+  border-radius: 0 3px 3px 0;
+  background: #3b82f6;
+}
+
+/* ─── RCA Graph ───────────────────────────────────────────────────────────── */
+.rca-node {
+  transition: filter 0.2s ease, transform 0.15s ease;
+}
+
+.rca-node:hover {
+  filter: brightness(0.95);
+  transform: scale(1.05);
+}
+
+.rca-edge {
+  stroke-dasharray: 8 4;
+  animation: dash 30s linear infinite;
+}
+
+@keyframes dash {
+  to { stroke-dashoffset: -1000; }
+}
+
+/* ─── Circular Progress ───────────────────────────────────────────────────── */
+.circular-progress-track {
+  stroke: #f1f5f9;
+  fill: none;
+}
+
+.circular-progress-fill {
+  fill: none;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.8s ease-out;
+}
